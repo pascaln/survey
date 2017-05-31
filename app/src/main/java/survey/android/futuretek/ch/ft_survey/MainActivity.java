@@ -18,9 +18,9 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends NextButtonActivity {
     private String userName;
-    private Button nextBtn;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -44,8 +44,7 @@ public class MainActivity extends BaseActivity {
 
     protected void onResume() {
         super.onResume();
-        nextBtn.setTextColor(Color.GRAY);
-        nextBtn.setEnabled(false);
+        deactivateNextButton();
         ((ViewGroup)findViewById(R.id.textLayout)).removeAllViews();
         List<String> textArray;
         if((userName=getDatabase().get("usersName"))!=null){
@@ -93,12 +92,6 @@ public class MainActivity extends BaseActivity {
                 }
             });
         }
-    }
-
-    private void activateNextButton(){
-        Button nextBtn = ((Button) findViewById(R.id.nextBtn));
-        nextBtn.setTextColor(Color.GREEN);
-        nextBtn.setEnabled(true);
     }
 
 }

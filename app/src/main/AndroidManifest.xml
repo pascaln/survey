@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".AboutFTActivity">
         </activity>
+        <activity android:name=".PortraitActivity">
+        </activity>
     </application>
 
 </manifest>
