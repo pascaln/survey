@@ -66,6 +66,7 @@ public class Database extends SQLiteOpenHelper {
                 return val;
             }
         }
+        cursor.close();
         db.close();
         return null;
     }
@@ -77,6 +78,7 @@ public class Database extends SQLiteOpenHelper {
             db.close();
             return true;
         }
+        cursor.close();
         db.close();
         return false;
     }
@@ -120,6 +122,7 @@ public class Database extends SQLiteOpenHelper {
                 skills.add(cursor.getString(0));
             } while (cursor.moveToNext());
         }
+        cursor.close();
         return skills;
     }
 
@@ -143,6 +146,7 @@ public class Database extends SQLiteOpenHelper {
                 return val;
             }
         }
+        cursor.close();
         db.close();
         return null;
     }
