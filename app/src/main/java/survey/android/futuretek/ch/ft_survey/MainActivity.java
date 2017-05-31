@@ -55,9 +55,7 @@ public class MainActivity extends BaseActivity {
             textArray.add("If you want to know more about Futuretek touch the 'NEXT \u25B7' button.");
             animateText(textArray, new AnimationListDone() {
                 public void done() {
-                    Button nextBtn = ((Button) findViewById(R.id.nextBtn));
-                    nextBtn.setTextColor(Color.GREEN);
-                    nextBtn.setEnabled(true);
+                    activateNextButton();
                 }
             });
         }else{
@@ -77,21 +75,10 @@ public class MainActivity extends BaseActivity {
         if(userName==null){
             openInputDialog(new View.OnClickListener() {
                 public void onClick(View v) {
-                    EditText userInput = ((EditText) v.findViewById(R.id.userInput));
-                    userName = null;
-                    try {
-                        userName = getDatabase().get("usersName");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    userName = ((EditText) v.findViewById(R.id.userInput)).getText().toString();
                     if (userName == null || userName.isEmpty()) {
                         List<String> textArray = new ArrayList<String>(1);
                         textArray.add("Didn't get your name...");
-                        animateText(textArray, new AnimationListDone() {
-                            public void done() {
-                                activateNextButton();
-                            }
-                        });
                     } else {
                         getDatabase().put("usersName", userName);
                         List<String> textArray = new ArrayList<String>(2);
@@ -113,5 +100,6 @@ public class MainActivity extends BaseActivity {
         nextBtn.setTextColor(Color.GREEN);
         nextBtn.setEnabled(true);
     }
+
 }
 
