@@ -21,7 +21,7 @@ public class PortraitActivity extends NextButtonActivity {
         showAnimatedTextWithNextButtonActivation(getPortraitText());
     }
 
-    private List<String> getPortraitText() {
+    protected List<String> getPortraitText() {
         List<String> textArray = new ArrayList<>(3);
         textArray.add("Hi my Name is Pascal");
         textArray.add("I'm working at houzy.ch.");
