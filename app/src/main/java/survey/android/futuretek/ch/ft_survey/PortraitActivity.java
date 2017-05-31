@@ -22,10 +22,11 @@ public class PortraitActivity extends NextButtonActivity {
     }
 
     protected List<String> getPortraitText() {
-        List<String> textArray = new ArrayList<>(3);
+        List<String> textArray = new ArrayList<>(4);
         textArray.add("Hi my Name is Pascal");
         textArray.add("I'm working at houzy.ch.");
         textArray.add("Before I had the position as CTO at moneyhouse.ch");
+        textArray.add("My webpage: www.pascalnaef.ch");
 
         return textArray;
     }

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,10 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SkillsActivity extends BaseActivity {
-    private Button btn_add;
     private ListView listview;
-    public List<String> _productlist = new ArrayList<String>();
+    public List<String> productList = new ArrayList<String>();
     private ListAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +48,8 @@ public class SkillsActivity extends BaseActivity {
         List<String> textArray = new ArrayList<>(1);
         textArray.add("Please add a developer skill");
         animateText(textArray);
-        _productlist.clear();
-        _productlist = getDatabase().getAllSkills();
+        productList.clear();
+        productList = getDatabase().getAllSkills();
         adapter = new ListAdapter(this);
         listview.setAdapter(adapter);
     }
@@ -62,7 +63,7 @@ public class SkillsActivity extends BaseActivity {
         }
 
         public int getCount() {
-            return _productlist.size();
+            return productList.size();
         }
 
         public Object getItem(int position) {
@@ -81,18 +82,33 @@ public class SkillsActivity extends BaseActivity {
                 viewHolder.delBtn = (Button) convertView.findViewById(R.id.deleteBtn);
                 viewHolder.delBtn.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        ViewGroup row = ((ViewGroup)v.getParent());
-                        String id = ((TextView)row.findViewById(R.id.textView1)).getText().toString();
+                        ViewGroup row = ((ViewGroup) v.getParent());
+                        String id = ((TextView) row.findViewById(R.id.textView1)).getText().toString();
                         getDatabase().deleteSkill(id);
-                        _productlist.remove(id);
+                        productList.remove(id);
                         adapter.notifyDataSetChanged();
+                    }
+                });
+                viewHolder.addBtn = (Button) convertView.findViewById(R.id.addBtn);
+                viewHolder.addBtn.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View view) {
+                        requestOrEditSkillName(null);
+                    }
+                });
+                viewHolder.editBtn = (Button) convertView.findViewById(R.id.editBtn);
+                viewHolder.editBtn.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View view) {
+                        ViewGroup row = ((ViewGroup) view.getParent());
+                        String id = ((TextView) row.findViewById(R.id.textView1)).getText().toString();
+                        getDatabase().deleteSkill(id);
+                        requestOrEditSkillName(id);
                     }
                 });
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            viewHolder.textView.setText(_productlist.get(position));
+            viewHolder.textView.setText(productList.get(position));
             return convertView;
         }
     }
@@ -100,18 +116,29 @@ public class SkillsActivity extends BaseActivity {
     private class ViewHolder {
         TextView textView;
         Button delBtn;
-
+        Button addBtn;
+        Button editBtn;
     }
 
-    private void insertSkill(String skill){
+    private void requestOrEditSkillName(String defaultText) {
+        openInputDialog(new View.OnClickListener() {
+            public void onClick(View v) {
+                String skillName = ((EditText) v.findViewById(R.id.userInput)).getText().toString();
+                if (skillName != null && !skillName.isEmpty()) {
+                    insertSkill(skillName);
+                }
+            }
+        }, defaultText);
+    }
+
+    private void insertSkill(String skill) {
         try {
             getDatabase().putSkill(skill);
-            _productlist = getDatabase().getAllSkills();
+            productList = getDatabase().getAllSkills();
             adapter.notifyDataSetChanged();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
 }

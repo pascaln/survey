@@ -2,6 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/editBtn"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/deleteBtn"
+        android:background="@drawable/btn_bg"
+        android:fontFamily="monospace"
+        android:text="E"
+        android:textColor="#09FF00"
+        android:textSize="22dp" />
+
+    <Button
+        android:id="@+id/addBtn"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_bg"
+        android:fontFamily="monospace"
+        android:text="+"
+        android:textColor="#09FF00"
+        android:textSize="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/editBtn" />
+
     <Button
         android:id="@+id/deleteBtn"
         android:layout_width="35dp"
@@ -9,10 +34,10 @@
         android:textSize="22dp"
         android:fontFamily="monospace"
         android:textColor="#09FF00"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:background="@drawable/btn_bg"
-        android:text="\u2718" />
+        android:text="\u2718"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
@@ -22,10 +47,9 @@
         android:padding="10dp"
         android:gravity="center_vertical"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
         android:background="@drawable/button_border"
-        android:layout_alignStart="@+id/deleteBtn"
-        android:text="Android" />
+        android:text="Android"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

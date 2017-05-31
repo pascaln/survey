@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class BaseActivity extends Activity {
     private String activityClassName;
     private boolean firstTimeOnThisActivity;
 
-    protected Database getDatabase(){
+    protected Database getDatabase() {
         return db;
     }
 
@@ -35,15 +36,15 @@ public class BaseActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        ((ViewGroup)findViewById(R.id.textLayout)).removeAllViews();
+        ((ViewGroup) findViewById(R.id.textLayout)).removeAllViews();
 
         firstTimeOnThisActivity = db.getBoolean(activityClassName);
-        if(!firstTimeOnThisActivity){
+        if (!firstTimeOnThisActivity) {
             db.put(activityClassName, true);
         }
 
         boolean firstTimeOnThisApp = db.getBoolean("firstTimeOnThisApp");
-        if(!firstTimeOnThisApp){
+        if (!firstTimeOnThisApp) {
             db.put("firstTimeOnThisApp", true);
             db.putSkill("Android");
             db.putSkill("Java");
@@ -51,7 +52,7 @@ public class BaseActivity extends Activity {
         }
     }
 
-    public boolean isFirstTimeOnThisActivity(){
+    public boolean isFirstTimeOnThisActivity() {
         return firstTimeOnThisActivity;
     }
 
@@ -66,14 +67,18 @@ public class BaseActivity extends Activity {
             }
         });
     }
+
     protected void animateText(List<String> textArray) {
         new TextAnimator(isFirstTimeOnThisActivity(), this, R.id.scrollView, R.id.textLayout, textArray);
     }
 
-    protected void openInputDialog(final View.OnClickListener onClickListener) {
+    protected void openInputDialog(final View.OnClickListener onClickListener, String defaultText) {
         final Dialog dlg = new Dialog(this);
         dlg.setContentView(R.layout.dialog);
-        try{
+        if (defaultText != null) {
+            ((EditText) dlg.findViewById(R.id.userInput)).setText(defaultText);
+        }
+        try {
             ((Button) dlg.findViewById(R.id.okBtn)).setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     dlg.dismiss();
@@ -87,11 +92,11 @@ public class BaseActivity extends Activity {
                         }
                     });
             dlg.show();
-        }catch (Exception e){
+        } catch (Exception e) {
         }
     }
 
-    protected void toast(String text){
+    protected void toast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 

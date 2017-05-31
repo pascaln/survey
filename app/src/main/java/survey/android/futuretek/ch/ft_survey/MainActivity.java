@@ -58,7 +58,7 @@ public class MainActivity extends NextButtonActivity {
                     showAnimatedTextWithNextButtonActivation(textArray);
                 }
             }
-        });
+        }, "");
     }
 
     private List<String> getWelcomeWithUsernameText(String userName) {
