@@ -26,12 +26,7 @@ public class MainActivity extends NextButtonActivity {
         setContentView(R.layout.activity_main);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
 
-        nextBtn = (Button) findViewById(R.id.nextBtn);
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AboutFTActivity.class));
-            }
-        });
+        createNextButton(MainActivity.this, AboutFTActivity.class);
 
         View mainTextView = findViewById(R.id.textLayout);
         mainTextView.setOnClickListener(new View.OnClickListener() {
@@ -44,8 +39,6 @@ public class MainActivity extends NextButtonActivity {
 
     protected void onResume() {
         super.onResume();
-        deactivateNextButton();
-        ((ViewGroup)findViewById(R.id.textLayout)).removeAllViews();
         List<String> textArray;
         if((userName=getDatabase().get("usersName"))!=null){
             textArray = new ArrayList<>(3);

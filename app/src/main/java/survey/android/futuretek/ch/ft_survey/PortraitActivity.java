@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This class shows the portrait for Pascal Näf
  * Created by naefp on 31.05.17.
  */
-
 public class PortraitActivity extends NextButtonActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,21 +22,12 @@ public class PortraitActivity extends NextButtonActivity {
         setContentView(R.layout.activity_main);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
 
-        nextBtn = (Button) findViewById(R.id.nextBtn);
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                startActivity(new Intent(PortraitActivity.this, SkillsActivity.class));
-            }
-        });
-
-        View mainTextView = findViewById(R.id.textLayout);
-
+        createNextButton(PortraitActivity.this, SkillsActivity.class);
     }
 
     protected void onResume() {
         super.onResume();
 
-        ((ViewGroup)findViewById(R.id.textLayout)).removeAllViews();
         List<String> textArray;
 
         textArray = new ArrayList<>(3);

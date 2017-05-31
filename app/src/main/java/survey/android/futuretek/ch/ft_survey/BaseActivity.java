@@ -11,6 +11,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -34,6 +35,8 @@ public class BaseActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        ((ViewGroup)findViewById(R.id.textLayout)).removeAllViews();
+
         boolean firstTimeOnThisApp = db.getBoolean("firstTimeOnThisApp");
         firstTimeOnThisActivity = db.getBoolean(activityClassName);
         if(!firstTimeOnThisActivity){

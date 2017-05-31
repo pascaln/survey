@@ -1,5 +1,6 @@
 package survey.android.futuretek.ch.ft_survey;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by naefp on 31.05.17.
+ * Implements all functions about from the next button
  */
 
 public class NextButtonActivity extends BaseActivity {
@@ -28,14 +29,21 @@ public class NextButtonActivity extends BaseActivity {
         deactivateNextButton();
     }
 
+    protected void createNextButton(final Activity fromActivity, final Class<?> toActivity) {
+        nextBtn = (Button) findViewById(R.id.nextBtn);
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(new Intent(fromActivity, toActivity));
+            }
+        });
+    }
+
     protected void deactivateNextButton() {
         nextBtn.setTextColor(Color.GRAY);
         nextBtn.setEnabled(false);
     }
 
-
     protected void activateNextButton() {
-        Button nextBtn = ((Button) findViewById(R.id.nextBtn));
         nextBtn.setTextColor(Color.GREEN);
         nextBtn.setEnabled(true);
     }

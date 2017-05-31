@@ -44,7 +44,6 @@ public class SkillsActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ((ViewGroup)findViewById(R.id.textLayout)).removeAllViews();
         List<String> textArray = new ArrayList<>(1);
         textArray.add("Please add a developer skill");
         animateText(textArray);

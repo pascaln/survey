@@ -17,28 +17,20 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AboutFTActivity extends BaseActivity {
+public class AboutFTActivity extends NextButtonActivity {
     private String userName;
-    private Button nextBtn;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
 
-        nextBtn = (Button) findViewById(R.id.nextBtn);
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                startActivity(new Intent(AboutFTActivity.this, PortraitActivity.class));
-            }
-        });
-
+        createNextButton(AboutFTActivity.this, PortraitActivity.class);
     }
 
     protected void onResume() {
         super.onResume();
-        nextBtn.setTextColor(Color.GRAY);
-        nextBtn.setEnabled(false);
-        ((ViewGroup)findViewById(R.id.textLayout)).removeAllViews();
+
         userName=getDatabase().get("usersName");
         List<String> textArray;
 
@@ -51,9 +43,7 @@ public class AboutFTActivity extends BaseActivity {
         textArray.add("Tell us more about what you know.");
         animateText(textArray, new AnimationListDone() {
             public void done() {
-                Button nextBtn = ((Button) findViewById(R.id.nextBtn));
-                nextBtn.setTextColor(Color.GREEN);
-                nextBtn.setEnabled(true);
+                activateNextButton();
             }
         });
     }
