@@ -6,10 +6,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +20,8 @@ public class NextButtonActivity extends BaseActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
     }
 
     protected void onResume() {
@@ -46,5 +46,13 @@ public class NextButtonActivity extends BaseActivity {
     protected void activateNextButton() {
         nextBtn.setTextColor(Color.GREEN);
         nextBtn.setEnabled(true);
+    }
+
+    protected void showAnimatedTextWithNextButtonActivation(List<String> textArray) {
+        animateText(textArray, new AnimationListDone() {
+            public void done() {
+                activateNextButton();
+            }
+        });
     }
 }

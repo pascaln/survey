@@ -81,6 +81,10 @@ public class Database extends SQLiteOpenHelper {
 		return false;
 	}
 
+	public void storeUsername(String userName) {
+		put("usersName", userName);
+	}
+
 	public void put(String key, boolean value){
 		put(key, ""+value);
 	}

@@ -37,11 +37,12 @@ public class BaseActivity extends Activity {
         super.onResume();
         ((ViewGroup)findViewById(R.id.textLayout)).removeAllViews();
 
-        boolean firstTimeOnThisApp = db.getBoolean("firstTimeOnThisApp");
         firstTimeOnThisActivity = db.getBoolean(activityClassName);
         if(!firstTimeOnThisActivity){
             db.put(activityClassName, true);
         }
+
+        boolean firstTimeOnThisApp = db.getBoolean("firstTimeOnThisApp");
         if(!firstTimeOnThisApp){
             db.put("firstTimeOnThisApp", true);
             db.putSkill("Android");
