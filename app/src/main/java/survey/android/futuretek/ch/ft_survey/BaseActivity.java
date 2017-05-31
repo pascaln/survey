@@ -20,7 +20,7 @@ public class BaseActivity extends Activity {
     private Database db;
     private String activityClassName;
     private boolean firstTimeOnThisActivity;
-    private boolean firstTimeOnThisApp;
+
     protected Database getDatabase(){
         return db;
     }
@@ -34,7 +34,7 @@ public class BaseActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        firstTimeOnThisApp = db.getBoolean("firstTimeOnThisApp");
+        boolean firstTimeOnThisApp = db.getBoolean("firstTimeOnThisApp");
         firstTimeOnThisActivity = db.getBoolean(activityClassName);
         if(!firstTimeOnThisActivity){
             db.put(activityClassName, true);
@@ -43,11 +43,8 @@ public class BaseActivity extends Activity {
             db.put("firstTimeOnThisApp", true);
             db.putSkill("Android");
             db.putSkill("Java");
+            db.putSkill("Software Developer");
         }
-    }
-
-    public boolean isFirstTimeOnThisApp(){
-        return firstTimeOnThisApp;
     }
 
     public boolean isFirstTimeOnThisActivity(){
